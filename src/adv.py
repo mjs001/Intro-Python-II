@@ -24,14 +24,14 @@ earlier adventurers. The only exit is to the south."""),
 
 # Link rooms together
 
-room['outside'].n_to = room['foyer']
-room['foyer'].s_to = room['outside']
-room['foyer'].n_to = room['overlook']
-room['foyer'].e_to = room['narrow']
-room['overlook'].s_to = room['foyer']
-room['narrow'].w_to = room['foyer']
-room['narrow'].n_to = room['treasure']
-room['treasure'].s_to = room['narrow']
+room['outside'].w = room['foyer']
+room['foyer'].a = room['outside']
+room['foyer'].s = room['overlook']
+room['foyer'].d = room['narrow']
+room['overlook'].w = room['foyer']
+room['narrow'].a = room['foyer']
+room['narrow'].s = room['treasure']
+room['treasure'].d = room['narrow']
 
 #
 # Main
@@ -49,3 +49,53 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+def __init__(self, name, current_rm):
+    self.name = name
+    self.current_rm = current_rm
+
+    def __str__(self):
+        return f"<Human '{self.name}' is currently located {self.current_rm}>"
+
+    playerTest = ("Myco", "Outside")
+    print(playerTest)
+
+    while True:
+        print(playerTest)
+        print("Enter Direction")
+        print("To add items to inventory: take <item-name>")
+        print("To remove item from inventory: remove <item-name>")
+        direction = direction.strip().lower().split(" ")
+        if len(response) == 1:
+            if direction not in ["w", "a", "s", "d", "q"]:
+                print("Not a valid direction!")
+                continue
+        if direction == "q":
+            print("EXITING")
+            break
+        current_rm = playerTest.current_rm
+        if direction == "w":
+            if current_rm.w is None:
+                print("The player is stuck!")
+                continue
+            else:
+                playerTest.current_rm = current_rm.w
+        elif direction == "a":
+                if current_rm.a is None:
+                    print("The player is stuck!")
+                else:
+                    playerTest.current_rm = current_rm.a 
+        elif direction == "S":
+                if current_rm.s is None:
+                    print("The player is stuck!")
+                else:
+                    playerTest.current_rm = current_rm.s 
+        elif direction == "d":
+            if current_rm.d is None:
+                print("The player is stuck!")
+            else:
+                playerTest.current_rm = current_rm.d
+        elif len(response) == 2:
+            print(len(response))
+
+            #START HERE TOMORROW
